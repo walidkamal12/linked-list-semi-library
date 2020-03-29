@@ -1,32 +1,531 @@
-# Prerequisites
-*.d
+#include <iostream>
+using namespace std;
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+struct node 
+{
+	int data;
+	node* next;
+	node* previous;
+};
 
-# Precompiled Headers
-*.gch
-*.pch
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
 
-# Fortran module files
-*.mod
-*.smod
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
-# Executables
-*.exe
-*.out
-*.app
+// the initation of the circular linked list function
+
+void cd(node*& x)
+{
+	node* k = x;
+	while (k->next != NULL)
+	{
+		k = k->next;
+	}
+	k->next = x;
+	x->previous = k;
+	
+}
+
+
+
+// delete node in circular linked list function
+
+void deleted(node* x)
+{
+	int i = 0, k;
+	cout << "choose which node you want to delete" << endl;
+	cin >> k;
+
+	if (x == NULL)
+	{
+		cout << "there is no such place" << endl;
+	}
+	while (x != NULL)
+	{
+		x = x->next;
+		i++;
+
+		if (i == k)
+		{
+			(x->previous)->next = x->next;
+			(x->next)->previous = x->previous;
+			delete(x);
+			break;
+
+
+		}
+	}
+}
+
+	
+
+// insert node in double linked list function function
+
+void insertd(node* x)
+{
+	int l, i = 1, s = 0;
+	cout << "enter the position you want to insert at" << endl;
+	cin >> l;
+	node* k = new(node);
+	k->data = 16567;
+	if (x == NULL)
+		cout << "out of range" << endl;
+
+
+	while (x != NULL)
+	{
+		node* c = x;
+		x = x->next;
+		i++;
+		if (i == l)
+		{
+			c->next = k;
+			k->next = x;
+			k->previous = c;
+			x->previous = k;
+			s = 1;
+		}
+	}
+	if (s == 0)
+		cout << "place doesnt exist in this linked list" << endl;
+
+}
+
+
+
+// double linked list creation function
+
+void dl(node*& x)
+{
+	node* k = x;
+	node* l;
+	x->previous = NULL;
+
+	while (k->next != NULL)
+	{
+		l = k;
+		k = k->next;
+		k->previous = l;
+	}
+}
+
+
+
+// circular linked list function
+
+void c(node*& x)
+{ 
+	node* k = x;
+	while (k->next != NULL)
+	{
+		k = k->next;
+	}
+	k->next = x;
+
+}
+
+
+// insert a node in the linked list function
+
+
+void insert(node* x)
+{
+	int l, i = 1, s = 0;
+	cout << "enter the position you want to insert at" << endl;
+	cin >> l;
+	node* k = new(node);
+	k->data = 1286747;
+	if (x == NULL)
+		cout << "out of range" << endl;
+
+
+	while (x != NULL)
+	{	
+		node* c = x;
+		x = x->next;
+		i++;
+		if (i == l)
+		{
+			c->next = k;
+			k->next = x;
+			s = 1;
+		}
+	}
+	if (s == 0)
+		cout << "place doesnt exist in this linked list" << endl;
+}
+
+
+
+// destroy linked list function
+
+void destroy(node*& x)
+{
+	while (x!= NULL)
+	{
+		node* k = x;
+		x = x->next;
+		delete (k);
+	}
+}
+
+
+// insert a node at end of the linked list function
+
+
+void insertend(node* x)
+{
+	node* k = new(node);
+	k->next = NULL;
+	k->data = 11;
+	while (x->next!=NULL)
+	{
+		x = x->next;
+	}
+	x->next = k;
+}
+
+
+
+// delete a node in the linked list function
+
+void deleteB(node*& list)
+{
+	node* x = list;
+	list = list->next;
+	delete (x);
+	
+}
+
+
+// search for a key in linked list function
+
+
+void key(node* x)
+{
+	int l, s=0;
+	cout << "what number do you want to search for" << endl;
+	cin >> l;
+	while (x != NULL)
+	{
+		if (l == x->data)
+		{
+			cout << "found your number is " << l << endl;
+			s = 1;
+			break;
+			
+		}
+		x = x->next;
+		
+		
+	}
+	if (s != 1)
+		cout << "gay lol" << endl;
+}
+
+
+
+// stick 2 linked list together function
+
+void glue(node*& list, node*& cat)
+{
+	node* x = list;
+	while (x->next != NULL)
+	{
+		x = x->next;
+	}
+	x->next = cat;
+}
+
+
+
+// average of a linked list function
+
+void average(node* x)
+{
+	int i = 0, av=0;
+	while (x!= NULL)
+	{
+		av += x->data;
+		x = x->next;
+		i++;
+	}
+	av = av / i;
+	cout << "your average is: " << av << endl;
+}
+	
+
+
+// insert a node at the beginning of a linked list function
+
+void insertbeginning(node*& list)
+{
+	node* l = new(node);
+	l->data = 7;
+	l->next = list;
+	list = l;
+}
+
+
+
+// display the linked list function
+
+void display(node* x)
+{
+	if (x == NULL)
+		cout << "empty nigger" << endl;
+	else
+	{
+		while (x != NULL)
+		{
+			cout << x->data << endl;
+			x = x->next;
+		}
+	}
+}
+
+
+
+// display cirular linked list function
+
+void displayc(node* x)
+{
+	int i=0, l;
+	l = x->data;
+	if (x == NULL)
+		cout << "empty list" << endl;
+	else
+	{
+		while (i != 2)
+		{
+			
+			cout << x->data << endl;
+			x = x->next;
+			if (x->data == l)
+				i++;
+		}
+	}
+}
+
+
+
+// display of circular double linked list function
+
+void displaycd(node* x)
+{
+	int i = 0;
+	if (x == NULL)
+		cout << "empty list" << endl;
+	else
+	{
+		while (i != 2)
+		{
+			if (x->data == 1)
+			{
+				i++;
+			}
+			cout << x->data << endl;
+			x = x->next;
+
+		}
+		cout << x->data << endl;
+		cout << endl;
+		i = 0;
+		cout << endl;
+
+		while (i != 2)
+		{
+			cout << x->data << endl;
+			x = x->previous;
+			if (x->data == 1)
+			{
+				i++;
+			}
+		}
+	} cout << x->data << endl;
+}
+
+
+
+// display double linked list function
+
+void displayd(node* x)
+{
+	if (x == NULL)
+		cout << "empty list" << endl;
+	else
+	{
+		while (x->next != NULL)
+		{
+			cout << x->data << endl;
+			x = x->next;
+		}
+		cout << x->data << endl;
+		cout << endl;
+
+		while (x->previous != NULL)
+		{
+			cout << x->data << endl;
+			x = x->previous;
+		}
+	} cout << x->data << endl;
+}
+	
+
+// main function
+
+
+int main()
+{
+	int i = 1, r=0, v=0, b=0, s=0;
+	node* list = new(node);
+	list->next = NULL;
+	list->data = 0;
+	node* k = list;
+	while (i < 10)
+	{
+		node* l = new(node);
+		l->data = i;
+		l->next = NULL;
+		k->next = l;
+		k = l;
+		i++;
+	}
+	node* cat = new(node);
+	cat->data = 10;
+	cat->next = NULL;
+	while (b != 1)
+	{
+		cout << "choose what kind of linked list you which for \n press 1 for single linked list \n press 2 for double linked list \n press 3 for circular linked list \n press 4 to display the single linked list \n press 5 to display double linked list \n press 6 to display circular linked list \n press 7 to display circularly linked list" << endl;
+		cin >> r;
+		if (r == 1)
+		{
+			cout << "press 1 for to insert at the beginning \n press 2 to insert at end \n press 3 to insert a new node in any place at the linked list \n press 4 to get the average of the linked list \n press 5 to glue linked list together \n press 6 if you want to delete first node  \n press 7 to search for a number in the linked list " << endl;
+			cin >> v;
+		}
+
+		if (v == 1)
+			insertbeginning(list);
+
+
+
+		if (v == 2)
+			insertend(list);
+
+
+
+
+
+		if (v == 3)
+			insert(list);
+
+
+
+
+
+		if (v == 4)
+			average(list);
+
+
+
+
+
+		if (v == 5)
+			glue(list, cat);
+
+
+
+
+
+		if (v == 6)
+			deleteB(list);
+
+
+
+
+
+		if (v == 7)
+			key(list);
+
+
+
+
+
+		if (r == 4)
+			display(list);
+
+
+
+
+		// this is the circular list part
+		if (r==3)
+
+		{		
+			node* list2 = list;
+			c(list2);
+			cout << endl;
+			displayc(list2);
+			cout << endl;
+		}
+
+
+
+
+		// this is double linked list
+
+		int m = 1;
+		node* list3 = new(node);
+		list3->next = NULL;
+		list3->data = 0;
+		node* h = list3;
+		while (m < 10)
+		{
+			node* j = new(node);
+			j->data = m;
+			j->next = NULL;
+			h->next = j;
+			h = j;
+			m++;
+		}
+
+
+
+
+		if (r == 2)
+		{
+			cout << "press 1 to insert a node in any place in the linked list \n press 2 to delete a node in the linked list \press 3 if you want the the double linked list to circularly" << endl;
+			cin >> s;
+			dl(list3);
+		}
+
+		if (r == 5)
+			displayd(list3);
+
+
+
+		if (s == 1)
+			insertd(list3);
+		cout << endl;
+
+
+
+
+		if (s == 2)
+			deleted(list3);
+		cout << endl;
+
+
+
+
+		if (r == 7)
+		{
+			cd(list3);
+			displaycd(list3);
+		}
+	}
+
+
+
+
+	return (0);
+}
